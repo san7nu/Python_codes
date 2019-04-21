@@ -8,10 +8,13 @@ import matplotlib.pyplot as plt
 def sigmoid(i):
   return 1 / (1 + np.exp(-i))
 
+n = 10
+n_train = 8
+n_test = 2
 
 # Reading pixel files and storing active pixels
 x = []
-for i in range(0,10):
+for i in range(0,n):
     file = str(i)+'.png'
     im = Image.open(file)
     pix = list(im.getdata())
@@ -24,7 +27,7 @@ W = 2*np.random.rand(1,15)-1 #random wts
 
 # Altering W using backprop
 for epoch in range(0,100):
-    for i in range(0,len(x)-2): # Loop till 7, we will use 8,9 to test 
+    for i in range(0,n_train): # Loop till 7, we will use 8,9 to test 
         sig = sigmoid(W.dot(x[i]))
         red = (2*(sig-(i%2))*sig*(1-sig))
         dw = red*x[i]
