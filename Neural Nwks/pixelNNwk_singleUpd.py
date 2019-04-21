@@ -21,7 +21,7 @@ def findcost(w,x):
 # Reading pixel files and storing active pixels
 list_x = []
 for i in range(0,10):
-    file = 'number_pixel\\'+str(i)+'.png'
+    file = str(i)+'.png'
     im = Image.open(file)
     pix = list(im.getdata())
     a = [int(i == (0,0,0)) for i in pix]

@@ -1,5 +1,5 @@
 ## Idea is we will read all pixel files and identify each pixel active or not, map this data to even or odd then observe how wts alter
-## Lets do wt update on each training sample also we will see cost for each step
+## Lets do wt update on each training sample also we will see cost for each step 
 
 from PIL import Image
 import numpy as np
