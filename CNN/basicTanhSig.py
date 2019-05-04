@@ -31,19 +31,18 @@ x2 = np.array([[1,1,1],[0,0,0],[0,0,0]])
 x3 = np.array([[0,0,0],[1,1,1],[1,1,1]])
 x4 = np.array([ [1,1,1],[1,1,1],[1,1,1]])
 X = [x1,x2,x3,x4]
-
 Y = np.array([0.53,0.77,0.88,1.1]).reshape(len(X),1)
 
-w1 = np.random.random((2,2)) - 1
-w2 = np.random.random((4,1)) - 1
-
 np.random.seed(1)
+w1 = np.random.random((2,2))
+w2 = np.random.random((4,1))
 
 tracecost = []
 learning_rate = 0.1
+epoch = 500
 
-for epoch in range(0,500):
-    c,out = findcost(w1,w2,False)
+for n in range(0,epoch):
+    c, _ = findcost(w1,w2,False)
     tracecost.append(c)
     for i in range(0,len(X)):
         #Fwd prop
@@ -55,6 +54,11 @@ for epoch in range(0,500):
         #Back prop
             #dw2 = dc_l2a * dl2a_l2 * dl2_w2
             #dw1 = dc_l2a * dl2a_l2 * dl2_l1a * dl1a_l1 * dl1_dw1
+            # OR thk it as propagation of grad
+            #dc(cost layer) = derv of cost 
+            #dw2(l2 layer) =  dc * derv sig(l2) * layer1_out
+            #dw1(l1 layer) = dc * derv sig(l2) * w2 * derv tanh(l1) * layer1_out(which is X)
+            #In final layer we need to convolve to pass grads
         dc_l2a = 2*(l2a - Y[i])
         dl2a_l2 = d_sig(l2a)
         dl2_w2 = l1a
@@ -70,7 +74,7 @@ for epoch in range(0,500):
         w1 -= learning_rate*dw1
         w2 -= learning_rate*dw2
 
-c,out = findcost(w1,w2,True)
+c, out = findcost(w1,w2,True)
 tracecost.append(c)
 
 plt.plot(tracecost)
