@@ -57,7 +57,7 @@ for n in range(0,epoch):
             # OR thk it as propagation of grad
             #dc(cost layer) = derv of cost 
             #dw2(l2 layer) =  dc * derv sig(l2) * layer1_out
-            #dw1(l1 layer) = dc * derv sig(l2) * w2 * derv tanh(l1) * layer1_out(which is X)
+            #dw1(l1 layer) = dc * derv sig(l2) * w2 * derv tanh(l1) * layer0_out(which is X)
             #In final layer we need to convolve to pass grads
         dc_l2a = 2*(l2a - Y[i])
         dl2a_l2 = d_sig(l2a)
